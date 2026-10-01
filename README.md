@@ -1,121 +1,82 @@
-<div align="center">
+# 🎟 Evento – Event Management & Ticket Booking System
 
-# 🎟️ EVENTO
-### Enterprise Event Management & Dynamic Digital Ticketing System
-
-[![Java](https://img.shields.io/badge/Java-17-orange.svg)](https://www.oracle.com/java/)
-[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.x-brightgreen.svg)](https://spring.io/projects/spring-boot)
-[![Thymeleaf](https://img.shields.io/badge/Thymeleaf-3.x-green.svg)](https://www.thymeleaf.org/)
-[![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3-purple.svg)](https://getbootstrap.com/)
-[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-
-An end-to-end full-stack web application engineered to streamline event publishing, user registration workflow, and instant dynamic QR-code ticket generation.
-
-[Key Features](#-key-features) • [Tech Stack](#-technology-stack) • [System Architecture](#-system-architecture) • [Getting Started](#-getting-started) • [Author](#-author)
+A full-stack Spring Boot application for event management, dynamic ticket booking, dynamic QR code generation, and administrative control.
 
 ---
 
-</div>
+## ⚙️ Requirements & Prerequisites
 
-## 📌 Executive Summary
-
-Evento addresses the operational overhead in modern event organization by providing an automated, role-based web interface. Built on top of the robust Spring Boot framework, the system enforces secure user authentication, transactional ticket purchasing, real-time availability tracking, and automated check-in verification via dynamically generated dynamic QR codes.
-
----
-
-## ✨ Key Features
-
-### 🔐 Authentication & Access Control
-- Role-Based Access Control (RBAC): Strict segregation between USER and ADMIN privileges.
-- Account Onboarding: Real-time email validation preventing duplicate registration.
-- Automated Routing: Context-aware redirection based on user credentials upon login.
-
-### 👥 User Capabilities
-- Event Discovery: Responsive dashboard showcasing active events with live dynamic database rendering.
-- Transactional Booking System: Seamless ticket processing with real-time database state persistence.
-- Digital QR Receipts: Dynamic generation of unique tracking identifiers (e.g., EVT-1790604298064) paired with scannable QR verification badges for physical check-ins.
-
-### 🛡️ Administrative Portal
-- Lifecycle Management: Complete CRUD interface for creating, modifying, and monitoring event details.
-- Cascade Data Consistency: One-click event termination with automated database cascade deletion for associated ticket records.
+Ensure the following tools are installed before running the project:
+- Java Development Kit (JDK 17 or higher)
+- Apache Maven (v3.8+)
+- MySQL Community Server (v8.0+)
+- Any Java IDE (IntelliJ IDEA, Eclipse, VS Code)
 
 ---
 
-## 🛠️ Technology Stack
+## 🗄️ Database Setup & Configuration
 
-| Architecture Layer | Technology / Library |
-| :--- | :--- |
-| Language | Java 17 LTS |
-| Backend Framework | Spring Boot 3.x (Spring MVC, Spring Data JPA) |
-| Template Engine | Thymeleaf Template Engine |
-| Frontend UI | HTML5, CSS3, Bootstrap 5.3, Bootstrap Icons |
-| Database Engine | MySQL 8.0 / In-Memory H2 Database |
-| Build System | Apache Maven |
-| External Integration | RESTful Third-Party QR Code Generation API |
+1. Open MySQL Workbench or Command Line and create a new database:
+   CREATE DATABASE evento_db;
 
----
+2. Open `src/main/resources/application.properties` and update your database credentials:
 
-## 🏗️ System Architecture
+   server.port=8080
 
-com.example.evento/
-├── 📁 controller/        # Application Controller Layer (HTTP Requests & Views)
-│   └── EventController.java
-├── 📁 model/             # JPA Entities / Database Schema Models
-│   ├── Event.java
-│   ├── Ticket.java
-│   └── User.java
-├── 📁 repository/        # Data Access Layer (Spring Data JPA Repositories)
-│   ├── EventRepository.java
-│   ├── TicketRepository.java
-│   └── UserRepository.java
-└── EventoApplication.java # Spring Boot Core Entry Point
-
----
-
-## 🚀 Getting Started
-
-### Prerequisites
-Ensure you have the following installed on your environment:
-- Java Development Kit (JDK 17+)
-- Apache Maven 3.8+
-- MySQL Server 8.0+
-
-### Local Installation & Setup
-
-1. Clone the Repository:
-   git clone https://github.com/ahmedmohiuddin455/evento.git
-   cd evento
-
-2. Database Configuration:
-   Navigate to src/main/resources/application.properties and configure your database parameters:
-   
    spring.datasource.url=jdbc:mysql://localhost:3306/evento_db?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true
    spring.datasource.username=root
    spring.datasource.password=YOUR_MYSQL_PASSWORD
+   spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+
    spring.jpa.hibernate.ddl-auto=update
    spring.jpa.show-sql=true
+   spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect
 
-3. Build & Launch Application:
+---
+
+## 🚀 How to Run the Application
+
+### Option 1: Terminal / Command Line
+1. Clone the repository:
+   git clone https://github.com/ahmedmohiuddin455/evento.git
+
+2. Navigate to project directory:
+   cd evento
+
+3. Build the application:
    mvn clean package
+
+4. Run the application:
    mvn spring-boot:run
 
-4. Application Access:
-   Once the console displays Started EventoApplication, access the web portal at:
-   http://localhost:8080
+### Option 2: IntelliJ IDEA / Eclipse
+1. File -> Open -> Select the project root folder.
+2. Allow Maven to import all dependencies automatically.
+3. Locate `src/main/java/com/example/evento/EventoApplication.java`.
+4. Right-click `EventoApplication.java` and select **Run**.
 
 ---
 
-## 👨‍💻 Developer & Academic Information
+## 🌐 Endpoints & Feature Walkthrough
 
-* Student Name: Mohiuddin Ahmed
-* Student ID: 2023100000476
-* Course Title: Advanced Java Lab
-* Course Code: CSE352.2
-* Department: Department of Computer Science & Engineering
-* Institution: Southeast University
+Once started, access the application at: `http://localhost:8080`
+
+| Route | Functionality | Access Level |
+| :--- | :--- | :--- |
+| `/` | Browse all active events | Public |
+| `/register` | Account registration (USER / ADMIN selection) | Public |
+| `/login` | User authentication | Public |
+| `/events` | Main dashboard to view and book tickets | USER / ADMIN |
+| `/book-ticket` | View ticket receipt with EVT-Tracking ID & Scannable QR Code | USER / ADMIN |
+| `/admin` | Create new events and delete existing ones | ADMIN Only |
 
 ---
 
-<div align="center">
-  <sub>Developed for academic review and production demonstration.</sub>
-</div>
+## 🧪 Testing Workflow for Reviewers
+
+1. Go to `http://localhost:8080/register` and create two accounts:
+   - One with role **ADMIN**
+   - One with role **USER**
+2. Log in as **ADMIN** -> Navigate to `/admin` -> Create a new event.
+3. Log in as **USER** -> Navigate to `/events` -> Select an event and book a ticket.
+4. Verify ticket details and dynamic QR code generated at `/book-ticket`.
