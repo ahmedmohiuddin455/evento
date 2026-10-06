@@ -4,19 +4,26 @@ A full-stack Spring Boot application for event management, dynamic ticket bookin
 
 ---
 
+## 🌐 Live Application & Infrastructure
+- **Live URL:** [https://evento-6kkv.onrender.com](https://evento-6kkv.onrender.com)
+- **Deployment:** Render Web Service (Multi-stage Docker)
+- **Production Database:** Aiven MySQL (Cloud Managed)
+
+---
+
 ## ⚙️ Requirements & Prerequisites
 
 Ensure the following tools are installed before running the project:
-- Java Development Kit (JDK 17 or higher)
+- Java Development Kit (JDK 21)
 - Apache Maven (v3.8+)
-- MySQL Community Server (v8.0+)
+- MySQL Community Server (v8.0+) or Aiven MySQL
 - Any Java IDE (IntelliJ IDEA, Eclipse, VS Code)
 
 ---
 
 ## 🗄️ Database Setup & Configuration
 
-1. Open MySQL Workbench or Command Line and create a new database:
+1. Open MySQL Workbench or Command Line and create a new database (for local testing):
    CREATE DATABASE evento_db;
 
 2. Open `src/main/resources/application.properties` and update your database credentials:
@@ -44,10 +51,10 @@ Ensure the following tools are installed before running the project:
    cd evento
 
 3. Build the application:
-   mvn clean package
+   .\mvnw clean package -DskipTests
 
 4. Run the application:
-   mvn spring-boot:run
+   .\mvnw spring-boot:run
 
 ### Option 2: IntelliJ IDEA / Eclipse
 1. File -> Open -> Select the project root folder.
@@ -59,7 +66,7 @@ Ensure the following tools are installed before running the project:
 
 ## 🌐 Endpoints & Feature Walkthrough
 
-Once started, access the application at: `http://localhost:8080`
+Once started, access the application at: `http://localhost:8080` or `https://evento-6kkv.onrender.com`
 
 | Route | Functionality | Access Level |
 | :--- | :--- | :--- |
@@ -74,7 +81,7 @@ Once started, access the application at: `http://localhost:8080`
 
 ## 🧪 Testing Workflow for Reviewers
 
-1. Go to `http://localhost:8080/register` and create two accounts:
+1. Go to `/register` and create two accounts:
    - One with role **ADMIN**
    - One with role **USER**
 2. Log in as **ADMIN** -> Navigate to `/admin` -> Create a new event.
